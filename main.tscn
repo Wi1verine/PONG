@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4dpmxfyuv0ci"]
+
+[ext_resource type="PackedScene" uid="uid://df7ubj2n74qoy" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bm433g6ss8fx1" path="res://player.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bw0hbcv7l7taa" path="res://player2.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ce312v4p03dlm" path="res://ball.tscn" id="4_lquwl"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1bvp3"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lquwl"]
+
+[node name="main" type="Node2D"]
+
+[node name="background" type="ColorRect" parent="."]
+offset_right = 1024.0
+offset_bottom = 640.0
+color = Color(0.0114239, 0.0897872, 0.168047, 1)
+
+[node name="player" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(64, 320)
+script = ExtResource("2_0xm2m")
+
+[node name="player2" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(960, 320)
+rotation = -3.14159
+script = ExtResource("3_h2yge")
+
+[node name="ball" parent="." instance=ExtResource("4_lquwl")]
+position = Vector2(480, 320)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="top" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_1bvp3")
+
+[node name="down" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 640)
+shape = SubResource("WorldBoundaryShape2D_lquwl")
